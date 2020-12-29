@@ -18,7 +18,7 @@ python3 manage.py startapp catalog
 ```
 
 ### Registering the catalog application
-Add a new line in `settings.py` under the definition of `INSTALLED_APPS` to specify application configuration object.
+Add a new line in **`settings.py`** under the definition of `INSTALLED_APPS` to specify application configuration object.
 ```
 INSTALLED_APPS = [
     'catalog.apps.CatalogConfig', # This object was created in /catalog/apps.py
@@ -26,7 +26,7 @@ INSTALLED_APPS = [
 ```
 
 ### Specifying the database
-Use the default SQLite in `settings.py` under the definition of `DATABASES`.
+Use the default SQLite in **`settings.py`** under the definition of `DATABASES`.
 ```
 DATABASES = {
     'default': {
@@ -38,7 +38,7 @@ DATABASES = {
 For different options, see https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 ### Hooking up the URL mapper
-Open `locallibrary/locallibrary/urls.py`, the `urlpatterns` list initially mpas all URLs with the pattern `admin/` to the module `admin.site.urls`.
+Open **`locallibrary/locallibrary/urls.py`**, the `urlpatterns` list initially mpas all URLs with the pattern `admin/` to the module `admin.site.urls`.
 Add a new list item to include a `path()` that forwards request with the pattern `catalog/` to the module `catalog.urls`, i.e. the file with `catalog/urls.py`.
 ```
 from django.urls import include
@@ -60,5 +60,5 @@ from django.conf.urls.static import static
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ```
 
-Create a file called `locallibrary/catalog/urls.py`, and define the empty imported `urlpatterns`.
+Create a file called **`locallibrary/catalog/urls.py`**, and define the empty imported `urlpatterns`.
 

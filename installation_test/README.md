@@ -32,7 +32,7 @@ $ django-admin startproject mytestsite
 $ cd mytestsite
 ```
 
-Run the development web server
+Run the development web server. The error message can be ignored.
 ```
 $ python3 manage.py runserver
 Watching for file changes with StatReloader
