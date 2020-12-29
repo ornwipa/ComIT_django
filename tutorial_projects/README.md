@@ -62,4 +62,3 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 Create a file called `locallibrary/catalog/urls.py`, and define the empty imported `urlpatterns`.
 
-
