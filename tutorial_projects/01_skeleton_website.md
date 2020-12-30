@@ -38,7 +38,8 @@ DATABASES = {
 For different options, see https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 ### Hooking up the URL mapper
-Open **`locallibrary/locallibrary/urls.py`**, the `urlpatterns` list initially mpas all URLs with the pattern `admin/` to the module `admin.site.urls`.
+Open **`locallibrary/locallibrary/urls.py`**, the `urlpatterns` list initially maps all URLs with the pattern `admin/` to the module `admin.site.urls`.
+
 Add a new list item to include a `path()` that forwards request with the pattern `catalog/` to the module `catalog.urls`, i.e. the file with `catalog/urls.py`.
 ```
 from django.urls import include

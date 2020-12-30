@@ -2,13 +2,13 @@
 
 ## Designing the LocalLibrary models
 
-Have separate models for every *object*, i.e., a group of related information. Here objects are authors, books, and book instances.
+Have separate models for every object, i.e., a group of related information. Here objects are authors, books, and book instances.
 
 Use models to represent selection-list options (drop-down list of choices) rather than hard coding the choices into website when options are not know up front or may change. Here models include book genre and language.
 
 Define models that are one-to-one (`OneToOneField`), one-to-many (`ForeignKey`), and many-to-many (`ManyToManyField`).
 
-[diagram](https://raw.githubusercontent.com/mdn/django-locallibrary-tutorial/master/catalog/static/images/local_library_model_uml.png)
+![diagram](https://raw.githubusercontent.com/mdn/django-locallibrary-tutorial/master/catalog/static/images/local_library_model_uml.png)
 
 Note: in `BookInstance:status`, the values `LOAN_STATUS` are hard-coded as it is not expected to change.
 
@@ -90,8 +90,6 @@ Define models in the application's **`locallibrary/catalog/models.py`** - see th
 	- `id = models.UUIDField(primary_key=True, default=uuid.uuid4, ...)`: set the `id` field to be a `primary_key` for this model.
 	- `LOAN_STATUS` is a tuple of choices whereas `status = models.CharField(max_length=1, choices=LOAN_STATUS, ...)` is a tuple containing tuples of key-value pairs.
 - Author
-
-### Running database migrations
 
 Run database migrations after models are created
 ```
