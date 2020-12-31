@@ -8,13 +8,13 @@ Codes in the fully developed version on GitHub, https://github.com/mdn/django-lo
 
 ### Creating the project
 ```
-django-admin startproject locallibrary
-cd locallibrary
+$ django-admin startproject locallibrary
+$ cd locallibrary
 ```
 
 ### Creating the catalog application
 ```
-python3 manage.py startapp catalog
+$ python3 manage.py startapp catalog
 ```
 
 ### Registering the catalog application
