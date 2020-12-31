@@ -1,10 +1,14 @@
 # Tutorial: The Local Library Website
 
-## Registering models
+Note: all the results created in this section can be viewed in the [figures](https://github.com/ornwipa/ComIT_django/tree/master/tutorial_projects/figures) folder
 
-Open **`/locallibrary/catalog/admin.py`** to add codes that import the models and call `admin.site.register` to register each of the models.
+## Admin application for internal data management
 
-## Creating superusers
+### Registering models (to add models into admin application)
+
+Open **`/locallibrary/catalog/admin.py`** to add codes that import the models and call `admin.site.register()` to register each of the models.
+
+### Creating superusers
 
 In the directory containing **manage.py**, run the command:
 ```
@@ -16,13 +20,9 @@ Password (again):
 Superuser created successfully.
 ```
 
-## Logging in and using the site
+### Logging in and using the site
 
-Restart the development server
-```
-$ python3 manage.py runserver
-```
-Open the URL http://127.0.0.1:8000/admin, enter new superuser's id and password credentials, then use the site.
+Restart the development server, run `python3 manage.py runserver`. Open the URL http://127.0.0.1:8000/admin, enter new superuser's id and password credentials, then use the site.
 
 ## Advanced configurations
 
