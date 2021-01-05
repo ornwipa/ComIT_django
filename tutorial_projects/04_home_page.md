@@ -1,6 +1,6 @@
 # Tutorial: The Local Library Website
 
-**Overview** First, define the information to display to users and the URLs for returning those resources. Then, create a URL mapper, views, and templates to display the pages.
+**Overview** - First, define the information to display to users and the URLs for returning those resources. Then, create a URL mapper, views, and templates to display the pages.
 - URL mappers (`urls.py`) receive HTTP requests and forward the suppored URLs to the appropriate view functions.
 - View functions (`views.py`) get the requested data from the models (`models.py`), create HTML pages (response) that dispaly the data, and return the page to the user to view in the browser.
 - Templates (`<filename>.html`) are used when rendering data in the views.
@@ -20,7 +20,7 @@ For read-only home page, URLs are:
 
 Note that, in **`locallibrary/urls.py`**, the code `path('catalog/', include('catalog.urls'))` was already added to the `urlpatterns` to ensure that, when URl starting with `catalog/` is received, the *URLConf* module `catalog.urls` will process the remaining substring.
 
-Create a placeholder file for the *URLConf* module, named **`catalog/urls.py`**, by adding `path('', views.index, name='index')` to the `urlpatterns`.
+Create a placeholder for the *URLConf* module, named **`catalog/urls.py`**; add `path('', views.index, name='index')` to the `urlpatterns`.
 ```
 urlpatterns = [
     path('', views.index, name='index'),
@@ -28,13 +28,13 @@ urlpatterns = [
 ```
 A view function will be called if the URL pattern is detected. The `views.index` is a function, named `index()` in the `views.py` file.
 
-The `path()` function speficies a `name` parameter, which is a unique identifier for this URL mapping. The `name` parameter can be used to "reverse" the mapper, i.e., to create a URL poiting the resource that the mapper is designed to handle. For example, it can refer or link to home page from any other page by adding `<a href="{% url 'index' %}">Home</a>` in a template.
+The `path()` function speficies a `name` parameter, which is a **unique identifier** for this URL mapping. The `name` parameter can be used to "reverse" the mapper, i.e., to create a URL pointing the resource that the mapper is designed to handle. For example, it can refer or link to home page from any other page by adding `<a href="{% url 'index' %}">Home</a>` in a template.
 
 ### View (function-based)
 
 > A view is a function that processes an HTTP request, fetches the required data from the database, renders the data in an HTML page using an HTML template, and then returns the generated HTML in an HTTP response to display the page to the user. 
 
-The index view for this model fetches information about the `Book`, `BookInstance` and `Author` records in database, and passes that informatio to a template.
+The index view for this model fetches `Book`, `BookInstance` and `Author` records in database, and passes that information to a template.
 
 Open **`catalog/views.py`**, note that django already import the [render()](https://docs.djangoproject.com/en/3.1/topics/http/shortcuts/#django.shortcuts.render) shortcut function to generate an HTML file using a template and data.
 
@@ -83,7 +83,7 @@ The template includes CSS from Bootstrap in `<link rel="stylesheet" href="https:
 }
 ```
 
-**Index template** - Create an HTML file `index.html` in **`/locallibrary/catalog/templates/`** with the following sample code. This code extends the base template on the first line then replaces the default `content` block for the template. Variables are enclosed in double braces such as `{{ num_books }}`.
+**Index template** - Create an HTML file `index.html` in **`/locallibrary/catalog/templates/`** with the sample code. This code extends the base template on the first line then replaces the default `content` block for the template. Variables are enclosed in double braces such as `{{ num_books }}`.
 ```
 {% extends "base_generic.html" %}
 
