@@ -1,6 +1,6 @@
 # Tutorial: The Local Library Website
 
-**Overview** - First, define the information to display to users and the URLs for returning those resources. Then, create a URL mapper, views, and templates to display the pages.
+First, define the information to display to users and the URLs for returning those resources. Then, create a URL mapper, views, and templates to display the pages.
 - URL mappers (`urls.py`) receive HTTP requests and forward the suppored URLs to the appropriate view functions.
 - View functions (`views.py`) get the requested data from the models (`models.py`), create HTML pages (response) that dispaly the data, and return the page to the user to view in the browser.
 - Templates (`<filename>.html`) are used when rendering data in the views.
@@ -83,7 +83,7 @@ The template includes CSS from Bootstrap in `<link rel="stylesheet" href="https:
 }
 ```
 
-**Index template** - Create an HTML file `index.html` in **`/locallibrary/catalog/templates/`** with the sample code. This code extends the base template on the first line then replaces the default `content` block for the template. Variables are enclosed in double braces such as `{{ num_books }}`.
+**Index template** - Create an HTML file `index.html` in **`/locallibrary/catalog/templates/`** with the sample code. This code extends the base template then replaces the default "content block". Variables are enclosed in double braces such as `{{ num_instances }}`.
 ```
 {% extends "base_generic.html" %}
 

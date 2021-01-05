@@ -34,17 +34,17 @@ Create the HTML file `/locallibrary/catalog/templates/catalog/book_list.html`.
     {% endfor %}
 ```
 - Accessing variables
+	- Access the _fields_ of the associated book record using the "dot notation" (e.g. `book.title` and `book.author`), where the text following the book item is the field name.
+	- Call _functions_ in the model from within the template, i.e., call `Book.get_absolute_url()` to get a URL for displaying the associated detail record.
 ```
       <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
 ```
-	- Access the _fields_ of the associated book record using the "dot notation" (e.g. `book.title` and `book.author`), where the text following the book item is the field name.
-	- Call _functions_ in the model from within the template, i.e., call `Book.get_absolute_url()` to get a URL for displaying the associated detail record.
 
 Update the base template in `locallibrary/catalog/templates/base_generic.html`. Insert `{% url 'books' %}` into the URL link: `<li><a href="{% url 'books' %}">All books</a></li>`.
 
 ## Book detail page
 
-The book detail page displays information about a specific book, accessed using the URL `catalog/book/<id>`. In addition to fields in the Book model (author, summary, ISBN, language, and genre), list the details of the available copies (`BookInstances`) including the status, expected return date, imprint, and id. 
+The book detail page displays information about a specific book, accessed using the URL `catalog/book/<id>`. In addition to fields in the `Book` model (author, summary, ISBN, language, and genre), list the details of the available copies (`BookInstances`) including the status, expected return date, imprint, and id. 
 
 ### URL mapping
 
@@ -104,4 +104,4 @@ In the **base_generic.html**, immediately after the `{% endblock %}` of the "con
     {% endif %}
   {% endblock %}
 ```
-The `page_obj` is a [paginator](https://docs.djangoproject.com/en/3.1/topics/pagination/#paginator-objects) that will exist if pagination is being used on the current page. The `{{ request.path }}' is used to get the current page URL for creating the pagination links. 
+The `page_obj` is a [paginator](https://docs.djangoproject.com/en/3.1/topics/pagination/#paginator-objects) that will exist if pagination is being used on the current page. The `{{ request.path }}` is used to get the current page URL for creating the pagination links. 
