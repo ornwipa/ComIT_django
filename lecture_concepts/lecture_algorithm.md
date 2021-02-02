@@ -23,7 +23,7 @@ Formalization process: underdtand the meaning of the sentence --> identify atomi
 
 Interpretation: "if I don't get paid, I won't go to work" --> write in logical structure: p -> q. Only p and q are variables having different values.
 
-#### Truth tables
+#### Truth Tables
 
 A single proposition can be true or false. A molecular proposition can also be true or false, e.g., "it's morning and the window is opened".
 
@@ -49,7 +49,7 @@ Program = instructions + data
 
 Instruction = operation that can be performed by the machine to manipulate data --> order of instructions = "execution flow" 
 
-#### Writing programs
+#### Writing Programs
 
 Computer program is not a natural language. Bohm-Jacopini theorem proves that any algorithm can be described with the three types of (building blocks) actions: sequence, selection or conditional, iteration or repetition of actions under certain conditions.
 
@@ -78,6 +78,38 @@ algorithm <name> (<parameters>): <type>
 end algorithm
 
 To use or invoke a sub-algorithm ... call its name with (), e.g. insertName()
+
+#### Variables' Scope
+
+Two variables of different scopes are two different variables even if they are declared with the same name. Variables have to belong to a scope to be accessed.
+
+#### Programming Languages
+
+Processor = brain of the computer
+
+Machine language works directly with instruction represented as binary number (0, 1), doesn't understand human language.
+
+Assembly language represents instruction with symbols readable by humans, and is architecture dependent, still low-level language.
+
+Assembler translates from assembly language to machine language for computer to understand. Changing hardware means re-writing program.
+
+Hardware abstraction makes programs compatible with several hardware architectures. If hardware manufacturers (e.g. AMD and Intel) don't agree to make universal models, then need different solution; that is, to invent a new language independent from specific architectures and providing a translator to convert a high-level language.
+
+Translator is programmed in assembly language; one translator per architecture. There can be different high level languages if there is at least one translator for the language.
+
+Compiler = program that receives something in high-level language and translate to machine-readable language; turns source code to object code prior to running the program
+
+Interpreter = program that receives source codes in high-level language and interpret on the run to execute; interpret one by one source code instructions
+
+Source program = set of source codes (all the files) that conform a program
+
+Object code = what is written by compiler as a result of compilation, in some languages such as C++ 
+
+Executable program = file that contains the program to execute
+
+Program written in C, is neither compiled to an assembly language nor write directly to the memory location, but to the operating system = intermediate layer between the code and the hardware
+
+Python is dynamically typed (data type of variable can be changed) and interpreted. There is no compiler for Python.
 
 #### Examples
 
