@@ -90,3 +90,13 @@ Four types: assignment, invoke functions or methods, object creation, `Null` (em
 
 - Note: there is only one constructor (cannot overload with different arguments); use `**kwargs` dictionary instead.
 
+## Block and Scopes
+
+Each block helps define a scope. We tabulate to the right on each new block.
+
+- Class definition
+
+- Method definition
+
+- Control flow structure (if, else, while and for define a scope)
+

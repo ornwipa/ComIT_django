@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>
+            Practicing JavaScript
+        </title>
+    </head>
+    <body>
+        <div id="main-content">
+            Hello World!
+            <button id="button">Click me!</button>
+        </div>
+    </body>
+    <script>
+        let message = "Hello from javascript"; // define a new variable
+        console.debug(message); // allow printing with special method
+        
+        function printMessage(message) { // define a function
+            console.debug(message); // print from web browser console
+        }
+        printMessage(message); // call to execute the function
+
+        // document.getElementById('main-content').innerHTML = "LoL javascript"; 
+        // document is the representation of the page, override the inner html
+        
+        let main = document.getElementById('main-content');
+        let button = document.getElementById("button");
+        button.onclick = function(event) { main.append("button clicked "); }
+        
+    </script>
+</html>
