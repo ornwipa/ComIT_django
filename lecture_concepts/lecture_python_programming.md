@@ -56,7 +56,7 @@ There is no constant in Python, a variable can be used as constant instead and d
 
 ## Python Data Types
 
-**Primitive** data type = indivisible value element (atomic): numeric, logic, characters
+**Primitive** data type = indivisible value element (atomic): numeric, logic, characters.
 
 - Primitive data type **variables** store **values** that represent data.
 
@@ -86,11 +86,20 @@ Four types: assignment, invoke functions or methods, object creation, `Null` (em
 
 **Construction**: `<class type> (<arguments>)`
 
-- Create an object returning a reference, using a constructor `emp1 = Employee("Zara", 2000)`
+- Create an object returning a reference, using a constructor `emp1 = Employee("Zara", 2000)`; use *positional parameters* following the order of the arguments i.e. Zara is mapped to name and 2000 is mapped to salary. Another way to construct is `emp2 = Employee(salary=3000, name="Sally")`
 
-- Note: there is only one constructor (cannot overload with different arguments); use `**kwargs` dictionary instead.
+- Call a *constructor* with the same name as the class' name, but define an *initializer* using `__init__` method.
 
-## Block and Scopes
+- Note: there is only one initializer (cannot overload with different arguments); use `**kwargs` dictionary instead. Or, to work around, give the default value(s) as `None`.
+
+```
+class Employee:
+	def __init__(self, name=None, salary=None):
+		self.name = name
+		self.salary = salary
+```
+
+## Block and Scope
 
 Each block helps define a scope. We tabulate to the right on each new block.
 
@@ -99,4 +108,43 @@ Each block helps define a scope. We tabulate to the right on each new block.
 - Method definition
 
 - Control flow structure (if, else, while and for define a scope)
+
+## Object-oriented Programming
+
+*State* of an object = all the object's attribute's current values.
+
+`print(<var>)` prints the contents of a variable. Generally, it prints `__main__.Employee object at xxxxxx` unless specify `__str__` method.
+
+```
+class Employee:
+	def __init__(self, name, salary):
+		self.name = name
+		self.salary = salary	
+
+	def __str__(self: 'Employee') -> str:
+		return f'Name: {self.name}, Salary: {self.salary}'
+	
+	def get_state(self):
+		return f'Name: {self.name}, Salary: {self.salary}'
+
+	def display(self):
+		print(f'Name: {self.name}, Salary: {self.salary}')
+```
+
+*Instance* of an object = a reference or pointer to a memory allocation.
+
+- Note: `name` is a parameter and a local variable; but `self.name` is an attribute of an object, which stays with the instance of the object.
+
+```
+class Employee:
+	employee_count = 0
+	def __init__(self, name, salary):
+		self.name = name
+		self.salary = salary	
+		Employee.employee_count += 1
+
+	def increase_salary(self, how_much):
+		self.salary += how_much
+		print(self.salary)
+```
 
