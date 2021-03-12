@@ -1,4 +1,4 @@
-# ComIT Lecture 8-11
+# ComIT Lecture 8-16
 
 ## Program Components
 
@@ -147,4 +147,30 @@ class Employee:
 		self.salary += how_much
 		print(self.salary)
 ```
+
+*Special variables* of an instance can be accessed: `print(employee_instance.__dict__['salary']` is equivalent to `print(employee_instance.salary)`. Thus, all members can be accessed in Python.
+
+## Access Modifiers
+
+- public: members that can be accessed anywhere
+
+- protected(_): members that should be accessed within the same package or module
+
+- private(__): members that should be accessed inside their class, 
+e.g. `employee_instance.__name = "Sandra"` is outside the scope and should not be used; however,
+`self.__name = "Bob"` inside the class definition is okay.
+
+*Encapsulation* = a concept of hiding details of the implementation of private methods or parameters. Example: Nobody know how `print()` works internally; it is encapsulated. Encapsulating involves exposing the interface.
+
+*Interface* = part of the object that is visible to the rest of the objects, i.e., the set of visible members of an object allowing user to operate
+
+`@staticmethod` above the declaration of method is to access the method without the instance of the class.
+
+```
+@staticmethod
+def get_employee_count():
+	return Employee.__employee_count
+```
+
+In the example, the `get_employee_count()` class method is a part of public interface of the `Employee` class to access the private `__employee_count` attribute.
 
