@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from people.views import get_current_time
+from people.views import get_current_time, home
 
 urlpatterns = [
+    path(''/ home),
     path('admin/', admin.site.urls),
     path('current_time/', get_current_time, name='current_time')
 ]
