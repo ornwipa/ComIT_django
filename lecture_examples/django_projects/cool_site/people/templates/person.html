@@ -1,0 +1,15 @@
+<div>
+    {{ person }}
+    First name: {{ person.first_name }}
+    Last name: {{ person.last_name }}
+    Email: {{ person.email }}
+    <img src="{{ person.profile_pic.url }}">
+</div>
+
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="first_name">
+        <input type="submit">
+    </form>
+</div>

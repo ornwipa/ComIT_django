@@ -1,0 +1,11 @@
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href={% static people/mystyle.css %}>
+    </head>
+    <body>
+        <p>Hello {{ name }}. It is now {{ current_time }} {% if time_zone %}in {{ time_zone }}{% endif %}.</p>
+        <p>The number is {{ number }}.</p>
+    </body>
+</html>

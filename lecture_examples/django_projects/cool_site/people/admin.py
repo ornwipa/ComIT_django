@@ -4,8 +4,8 @@ from django.contrib import admin
 
 from people.models import Person
 
-@register(Person)
+# @register(Person)
 class PersonAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name')
 
-# admin.site.register(Person, PersonAdmin)
+admin.site.register(Person, PersonAdmin)

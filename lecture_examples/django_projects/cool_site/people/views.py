@@ -1,23 +1,64 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse
 
 # Create your views here.
-'''
-# from django.http import HttpResponse
+
+from django.http import response
 from django.template.response import SimpleTemplateResponse
-import datetime
+from django.views.generic.base import View, TemplateView
+from django.views.generic.list import ListView
+from first_app.views import hello_world
+from people.models import Person
 
-def get_current_time(request):
-	current_time = datetime.datetime.now()
-    time_zone = request.GET.get('time_zone', None)
-	# html = f"<html><body>It is now {current_time} in {time_zone}.</body></html>"
-    # return HttpResponse(html)
-    the_data = {
-        'current_time': current_time,
-        'time_zone': time_zone
+def display_person_info(request, pk):
+    person = Person.objects.get(pk=pk)
+    data_context = {
+        'person': person
     }
-    response = SimpleTemplateResponse('current_time.html', the_data)
-    return response
-'''
+    return SimpleTemplateResponse('person.html', data_context)
 
-def home(request):
-    return HttpResponse("Hello")
+class PersonInfo(View):
+
+    def get(request, *args, **kwargs):
+        pk = kwargs.get('pk')
+        person = Person.objects.get(pk=pk)
+        data_context = {
+            'person': person
+        }
+        return SimpleTemplateResponse('person.html', data_context)
+
+    def post(request, *args, **kwargs):
+        data_context = {}
+        return SimpleTemplateResponse('person.html', data_context)
+
+class PersonInfo(TemplateView):
+
+    template_name = 'person.html' # allow to define template
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) # inherite from TemplateView
+        pk = kwargs.get('pk')
+        person = Person.objects.get(pk=pk)
+        context['person'] = person
+        return context # return only context to render in template
+
+class PersonInfoMixin:
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = kwargs.get('pk')
+        person = Person.objects.get(pk=pk)
+        context['person'] = person 
+        return context
+    
+class PersonInfo(PersonInfoMixin, TemplateView):
+
+    template_name = 'person_html'
+
+class DrawOnProfilePic(PersonInfoMixin, TemplateView):    
+    pass
+
+class PersonListView(ListView):
+
+    template_name = 'person_list.html'
+    model = Person
+    

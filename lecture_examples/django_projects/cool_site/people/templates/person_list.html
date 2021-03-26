@@ -1,0 +1,11 @@
+<ol>
+{% for person in object_list %}
+    <li> 
+        {{ person.first_name }} {{ person.last_name}} - {{ person.email }} 
+    </li>
+{% empty %}
+    <li>
+        No People Added!
+    </li>
+{% endfor %}
+</ol>

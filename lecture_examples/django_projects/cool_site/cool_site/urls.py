@@ -15,10 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from people.views import get_current_time, home
+from first_app.views import get_current_time, hello_world
+from people.views import display_person_info, PersonInfo, PersonListView
 
 urlpatterns = [
-    path(''/ home),
+    path('', home),
     path('admin/', admin.site.urls),
-    path('current_time/', get_current_time, name='current_time')
+    path('current_time/', get_current_time, name='current_time'),
+    path('hello_world/<name>/<int:number>', hello_world), # take variables from the URL
+    # path('display_person/<slug:pk>', display_person_info) # pk = primary key (as ascii)
+    path('display_person/<slug:pk>', PersonInfo.as_view()),
+    path('people/', PersonListView.as_view(), name='people-list')
 ]
