@@ -9,7 +9,8 @@
 <div>
     <form method="POST">
         {% csrf_token %}
-        <input type="text" name="first_name">
-        <input type="submit">
+        {{ form }} <!-- display form added to context -->
+        <!-- <input type="text" name="first_name"> -->
+        <input type="submit"> <!-- always need submit -->       
     </form>
 </div>

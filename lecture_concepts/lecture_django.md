@@ -68,6 +68,8 @@ urlpatterns = [
 ]
 ```
 
+Note: see the `TemplateView`, `ListView` and `DetailView` use cases in examples. These base views allow to pass only the *context* to render on html. 
+
 ### Django Template
 
 A template is a text document or Python using string. Django template languages are HTML, CSS, JavaScript.
@@ -87,4 +89,40 @@ The `views.py` should be changed to the following codes:
 In the `templates/current_time.html`, the html file contains "It is now {{current_time}}."
 
 To add a style sheet, use `static` folder and add `<link rel = "stylesheet" href={% static people/mystyle.css %}>` to the head of the html file.
+
+### Django Forms
+
+A Python class, not HTML. A form has fields and each field has data validation.
+
+```
+from django import forms
+class NameForm(forms.Form):
+	your_name = forms.CharField(label="Your name", max_length=100)
+```
+
+Every form instance has an `is_valid()` method that runs validation routines and return `True` and place the form data in its `cleaned_data` attribute.
+
+```
+class PersonInfo(TemplateView):
+
+    template_name = 'person.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = kwargs.get('pk')
+        person = Person.objects.get(pk=pk)
+        context['person'] = person
+        return context 
+
+    def post(self, request, **kwargs):
+        context = self.get_context_data(**kwargs)
+        person = context['person']
+        form = FirstNameForm(data=request.POST)
+        if form.is_valid():
+            person.first_name = form.cleaned_data['first_name']
+            person.save()
+            return redirect('people-list')
+        else:
+            return render(request, self.template_name, context=context)
+```
 

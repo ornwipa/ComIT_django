@@ -1,13 +1,10 @@
 from django.shortcuts import render, redirect, HttpResponse
-
-# Create your views here.
-
 from django.http import response
 from django.template.response import SimpleTemplateResponse
 from django.views.generic.base import View, TemplateView
 from django.views.generic.list import ListView
-from first_app.views import hello_world
 from people.models import Person
+from people.forms import FirstNameForm
 
 def display_person_info(request, pk):
     person = Person.objects.get(pk=pk)
@@ -35,11 +32,34 @@ class PersonInfo(TemplateView):
     template_name = 'person.html' # allow to define template
     
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs) # inherite from TemplateView
+        context = super().get_context_data(**kwargs) # inherited from TemplateView
         pk = kwargs.get('pk')
         person = Person.objects.get(pk=pk)
         context['person'] = person
+
+        if self.request.method == 'POST':
+            context['form'] = FirstNameForm(self.request.POST) # add form to data context
+        else:
+            context['form'] = FirstNameForm()
+
         return context # return only context to render in template
+
+    def post(self, request, **kwargs):
+        context = self.get_context_data(**kwargs)
+        person = context['person']
+        # first_name = request.POST['first_name']
+        # person.first_name = first_name
+        # person.save()
+        # return redirect('people-list')
+
+        form = context['form']
+        # form = FirstNameForm(data=request.POST) # POST contains data submitted to the form
+        if form.is_valid():
+            person.first_name = form.cleaned_data['first_name'] # match name in form to model
+            person.save()
+            return redirect('people-list')
+        else:
+            return render(request, self.template_name, context=context)
 
 class PersonInfoMixin:
 
