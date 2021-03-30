@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'first_app',
-    'people', # add the moules to use data models
+    'people', # add the modules to use data models
 ]
 
 MIDDLEWARE = [
