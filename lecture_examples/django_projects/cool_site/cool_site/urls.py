@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from first_app.views import get_current_time, hello_world
-from people.views import display_person_info, PersonInfo, PersonListView
+# from people.views import display_person_info
+from people.views import AllEmails, PersonInfo, PersonListView
 
 urlpatterns = [
     path('', home),
@@ -26,4 +27,5 @@ urlpatterns = [
     # path('display_person/<slug:pk>', display_person_info) # pk = primary key (as ascii)
     path('display_person/<slug:pk>', PersonInfo.as_view()),
     path('people/', PersonListView.as_view(), name='people-list')
+    path("people/emails", AllEmails.as_view(), name='people-emails-list')
 ]

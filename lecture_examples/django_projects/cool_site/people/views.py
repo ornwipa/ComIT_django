@@ -81,4 +81,9 @@ class PersonListView(ListView):
 
     template_name = 'person_list.html'
     model = Person
-    
+
+class AllEmails(View):
+
+    def get(self, request):
+        emails = Person.objects.all().values_list('email', flat=True)
+        return response.JsonResponse(data=list(emails), safe=False)
