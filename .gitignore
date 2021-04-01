@@ -2,3 +2,4 @@ __pycache__/
 lecture_examples/.vscode/
 lecture_examples/PyCharm/vnev/
 lecture_examples/duckduckgo_search.png
+*.sqlite3

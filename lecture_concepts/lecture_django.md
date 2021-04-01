@@ -44,6 +44,28 @@ A model represents a table in a (relational) database: columns ~ attributes; row
 
 *Schema* = general shape or architecture of database (columns or fields), not the data themselves.
 
+Always need to connect to database prior to run django application. To do so, run the following command:
+
+```
+django-admin makemigrations initial
+python manage.py migrate
+python manage.py runserver
+```
+
+An example of minimal requirement for models used for creating an online store application:
+
+```
+from django.db import models
+
+class Review(models.Model):
+    score = models.IntegerField()
+    comment = models.TextField()
+
+class Product(models.Model):
+    name = models.CharField(max_length=200)
+    reviews = models.ManyToManyField(Review)
+```
+
 ### Django View
 
 A view is responsible for taking a request and returning a response.
@@ -52,6 +74,7 @@ Views can be functions or classes. See the example folder.
 
 ```
 from django.http import HttpResponse
+
 def get_current_time(request):
 	current_time = datetime.now()
 	html = f"<html><body>It is now {current_time}.</body></html>"
@@ -62,6 +85,7 @@ In the `urls.py` file, add the following codes to map a view to a URL. Note that
 
 ```
 from first_app.views import get_current_time # add this line
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('current_time/', get_current_time, name='current_time') # add this line
