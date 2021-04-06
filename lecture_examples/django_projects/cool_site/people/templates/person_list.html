@@ -1,7 +1,19 @@
+{% extends 'base_list.html' %}
+
+{% block head %}
+    {{ block.super }} <!-- make sure the bootstrap in the head of base_list.html get loaded (base implementation) -->
+    <title>Person List</title>
+{% endblock %}
+
+{% block heading %} <!-- override the heading of the base_list.html; don't include block.super -->
+    People List
+{% endblock %}
+
+{% block content %}
 <ol>
-{% for person in object_list %}
-    <li> 
-        {{ person.first_name }} {{ person.last_name}} - {{ person.email }} 
+{% for person_item in object_list %}
+    <li>
+        {% include "person_list_item.html" with person=person_item with %}
     </li>
 {% empty %}
     <li>
@@ -9,3 +21,4 @@
     </li>
 {% endfor %}
 </ol>
+{% endblock %}

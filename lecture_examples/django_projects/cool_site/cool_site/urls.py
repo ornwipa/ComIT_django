@@ -25,7 +25,7 @@ urlpatterns = [
     path('current_time/', get_current_time, name='current_time'),
     path('hello_world/<name>/<int:number>', hello_world), # take variables from the URL
     # path('display_person/<slug:pk>', display_person_info) # pk = primary key (as ascii)
-    path('display_person/<slug:pk>', PersonInfo.as_view()),
-    path('people/', PersonListView.as_view(), name='people-list')
-    path("people/emails", AllEmails.as_view(), name='people-emails-list')
+    path('display_person/<slug:pk>', PersonInfo.as_view(), name='display-person'),
+    path('people/', PersonListView.as_view(), name='people-list'),
+    path('people/emails/', AllEmails.as_view(), name='people-emails-list')
 ]

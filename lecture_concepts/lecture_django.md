@@ -96,9 +96,7 @@ Note: see the `TemplateView`, `ListView` and `DetailView` use cases in examples.
 
 ### Django Template
 
-A template is a text document or Python using string. Django template languages are HTML, CSS, JavaScript.
-
-There can be Python component in the .html file, using **{{ }}**.
+A template is a text document or Python using string. Django template languages are HTML, CSS, JavaScript. It can also be XML, CSV, JSON or email.
 
 The `views.py` should be changed to the following codes:
 
@@ -113,6 +111,36 @@ The `views.py` should be changed to the following codes:
 In the `templates/current_time.html`, the html file contains "It is now {{current_time}}."
 
 To add a style sheet, use `static` folder and add `<link rel = "stylesheet" href={% static people/mystyle.css %}>` to the head of the html file.
+
+There can be Python component in the .html file, using **{{ variable }}** and **{% tag %}**. Variables get replaced with real values when template is rendered. Tags control logics.
+
+The **"dot"(.)** notation is used to access attributes of a variable. When evaluating a dot, the template attempts a dictionary lookup, an attribute or method lookup, and then a numeric index lookup: `{{ variable.0 }}` shows the first argument. If the resulting value is callable, i.e. a method, then it is called with no arguments. If the variable does not exist, the value of `string_if_valid` option is used (this can be over-written).
+
+Template variables can be manipulated by using **filters**: `{{ variable | filter}}`, and **"pipe"(|)**, e.g. `{{ text | escape | linebreak }}`. Filters can take arguments with ":", e.g. `{{ bio | truncatewords:30 }}` displays the first 30 words of the `bio` variable.
+
+Special markup that describe template tags: `{% tag %}`.
+
+```
+<ul>
+{% for athlete in athlete_list %}
+	<li>{{ athlete.name }}</li>
+{% endfor %}
+</ul>
+
+{% if athlete_list %}
+	Number of athletes: {{ athlete_list|length }}
+{% else %}
+	No athletes
+{% endif %}
+```
+
+The **url** tag returns an absolute path reference (URL without domain name) matchinging a given view and optional parameters. Format: `{% url 'some-url-name' v1 v2 %}`, Example: `<a href="{% url 'display-person' person.pk %}">`.
+
+The **include** tag loads and renders another template within the current template using the current data context. Examples: `{% include "foo/bar.html" %}`, or passing additional context `{% include "name_snippet.html with person="Joel" %}`.
+
+**Template inheritance** allows to build a base "skeleton" template, using `{% block name %}` ... `{% endblock %}`, which can be overwritten. The child templates have to start with `{% extends 'base_list.html' %}`
+
+Overriding a block
 
 ### Django Forms
 
