@@ -34,7 +34,7 @@ mysite/		<- project folder
     views.py		<- define views
 ```
 
-To start a Django project, use the command `django-admin startproject <project name>`.
+To start a Django project, use the command `django-admin startproject <project name> .`; adding the `.` at the end to put the project in the current directory.
 
 To start a Django app, within the project folder, use the command `django-admin startapp <app name>`.
 

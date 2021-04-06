@@ -1,5 +1,7 @@
 # ComIT Lecture 8-16
 
+Note: to create a new virtual environment, run the command `python -m venv .venv` through Virtual Studio Code.
+
 ## Program Components
 
 - **Lexicons** for writting correct words
