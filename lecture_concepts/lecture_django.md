@@ -134,13 +134,23 @@ Special markup that describe template tags: `{% tag %}`.
 {% endif %}
 ```
 
-The **url** tag returns an absolute path reference (URL without domain name) matchinging a given view and optional parameters. Format: `{% url 'some-url-name' v1 v2 %}`, Example: `<a href="{% url 'display-person' person.pk %}">`.
+The **url** tag returns an absolute path reference (URL without domain name) matchinging a given view and optional parameters. 
 
-The **include** tag loads and renders another template within the current template using the current data context. Examples: `{% include "foo/bar.html" %}`, or passing additional context `{% include "name_snippet.html with person="Joel" %}`.
+- Format: `{% url 'some-url-name' v1 v2 %}`
 
-**Template inheritance** allows to build a base "skeleton" template, using `{% block name %}` ... `{% endblock %}`, which can be overwritten. The child templates have to start with `{% extends 'base_list.html' %}`
+- Example: `<a href="{% url 'display-person' person.pk %}">`
 
-Overriding a block
+The **include** tag loads and renders another template within the current template using the current data context. 
+
+- Example: `{% include "foo/bar.html" %}` 
+
+- To pass an additional context, use **with**: `{% include "name_snippet.html with person="Joel" %}`.
+
+**Template inheritance** allows to build a base "skeleton" template, using `{% block name %}` ... `{% endblock %}`, which can be overridden. 
+
+- A *child* templates, inherited from a *parent* template, has to start with `{% extends '<parent>.html' %}`.
+
+- When overriding a block, the `{{ block.super }}` variable can be used to display the parent block's content.
 
 ### Django Forms
 
