@@ -1,6 +1,6 @@
 __pycache__/
 *.vscode/
 *.venv
-lecture_examples/duckduckgo_search.png
 *.sqlite3
-*.venv
+lecture_examples/whispr
+lecture_examples/duckduckgo_search.png
