@@ -44,14 +44,6 @@ A model represents a table in a (relational) database: columns ~ attributes; row
 
 *Schema* = general shape or architecture of database (columns or fields), not the data themselves.
 
-Always need to connect to database prior to run django application. To do so, run the following command:
-
-```
-django-admin makemigrations initial
-python manage.py migrate
-python manage.py runserver
-```
-
 An example of minimal requirement for models used for creating an online store application:
 
 ```
@@ -64,6 +56,68 @@ class Review(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=200)
     reviews = models.ManyToManyField(Review)
+```
+
+Always need to connect to database prior to run django application. To do so, run the following command:
+
+```
+$ python ./manage.py makemigrations
+Migrations for 'profiles':
+  profiles/migrations/0001_initial.py
+    - Create model Profile
+
+$ python ./manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, profiles, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying profiles.0001_initial... OK
+  Applying sessions.0001_initial... OK
+```
+
+Every time a model (or schema) is changed, need to re-do `makemigrations` and `migrate`.
+
+```
+$ python ./manage.py makemigrations
+Migrations for 'profiles':
+  profiles/migrations/0002_auto_20210408_0042.py
+    - Alter field picture on profile
+
+$ python ./manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, profiles, sessions
+Running migrations:
+  Applying profiles.0002_auto_20210408_0042... OK
+```
+
+Then, to use the application, run the application with the command:
+
+```
+$ python ./manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+April 08, 2021 - 00:40:16
+Django version 3.1.4, using settings 'whispr.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
 ```
 
 ### Django View
@@ -92,7 +146,24 @@ urlpatterns = [
 ]
 ```
 
-Note: see the `TemplateView`, `ListView` and `DetailView` use cases in examples. These base views allow to pass only the *context* to render on html. 
+Note: see the `TemplateView`, `ListView` and `DetailView` use cases in examples. These base views allow to pass only the *context* to render on html; see the "Django Forms" section.
+
+Another example of using built-in view class is ...
+
+```
+from django.contrib.auth import LoginView
+
+class StartView(LoginView):
+
+    template_name = 'login_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # do something here
+        
+        return context
+```
 
 ### Django Template
 
@@ -158,6 +229,7 @@ A Python class, not HTML. A form has fields and each field has data validation.
 
 ```
 from django import forms
+
 class NameForm(forms.Form):
 	your_name = forms.CharField(label="Your name", max_length=100)
 ```
@@ -165,6 +237,8 @@ class NameForm(forms.Form):
 Every form instance has an `is_valid()` method that runs validation routines and return `True` and place the form data in its `cleaned_data` attribute.
 
 ```
+from django.views.generic import TemplateView
+
 class PersonInfo(TemplateView):
 
     template_name = 'person.html'
@@ -187,4 +261,16 @@ class PersonInfo(TemplateView):
         else:
             return render(request, self.template_name, context=context)
 ```
+
+Important: `{% csrf_token %}` is always needed in the **template** to be able to submit the **form**. For example, in *login_page.html*, in-between the `<form>` HTML tags, the following code is valid.
+
+```
+<form method='POST'>
+    {% csrf_token %}
+    {{ form }}
+    <input type='submit' value='Login'/>
+</form>
+```
+
+The `{{ form }}` variable in the code refer to the built-in class, called `LoginView`, shown in the "Django View" section.
 
