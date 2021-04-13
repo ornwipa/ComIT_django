@@ -7,7 +7,7 @@
 - [admin page](https://github.com/ornwipa/ComIT_django/blob/master/tutorial_projects/03_admin_site.md)
 - [home page](https://github.com/ornwipa/ComIT_django/blob/master/tutorial_projects/04_home_page.md)
 - [generic list and detail views](https://github.com/ornwipa/ComIT_django/blob/master/tutorial_projects/05_generic_list_and_detail_view.md)
-- [sessions framework]
+- [session framework](https://github.com/ornwipa/ComIT_django/blob/master/tutorial_projects/06_session_framework.md)
 - [user authentication and permissions]
 - [forms]
 - [testing]
