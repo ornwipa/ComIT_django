@@ -28,7 +28,7 @@ MIDDLEWARE = [
 
 A superuser, created with the command `python manage.py createsuperuser`, is already authenticated and has all permissions.
 
-To create a general user, i.e. "normal library member", start the development server and navigate to the admin site to **Add** a `Group` and a `User`.
+To create a general user, i.e. "library member", start the development server and navigate to the admin site to **Add** a `Group` and a `User`.
 
 ## Setting up authentication views
 
@@ -59,5 +59,9 @@ TEMPLATES = [
 LOGIN_REDIRECT_URL = '/' # Redirect to home URL after login (Default redirects to /accounts/profile/)
 ```
 
-Create a registration directory on the search path and then add the login.html file: **locallibrary/templates/registration/login.html**, locallibrary/templates/registration/**logged_out.html**, /locallibrary/templates/registration/**password_reset_form.html** and /locallibrary/templates/registration/**password_reset_done.html**, etc.
+Create a registration directory on the search path and add the login.html file:
+- **locallibrary/templates/registration/login.html**, 
+- locallibrary/templates/registration/**logged_out.html**, 
+- locallibrary/templates/registration/**password_reset_form.html** and 
+- locallibrary/templates/registration/**password_reset_done.html**, etc.
 
