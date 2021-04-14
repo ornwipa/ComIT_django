@@ -177,3 +177,48 @@ Create the template file **/catalog/templates/catalog/bookinstance_list_borrowed
 
 ## Permissions
 
+### Models
+
+By default, Django automatically gives *add*, *change*, and *delete* permissions to all models, which allow users with the permissions to perform the associated actions via the admin site.
+
+Permissions are defined under `class Meta` within the model such as `permissions = (("can_mark_returned", "Set book as returned"),)`. In the `permissions` field, each permission is defined in a nested tuple containing the permission name and permission display value.
+
+Always update database when changing models
+
+```
+$ python manage.py makemigrations
+Migrations for 'catalog':
+  catalog/migrations/0004_auto_20210414_1835.py
+    - Change Meta options on bookinstance
+$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, catalog, contenttypes, sessions
+Running migrations:
+  Applying catalog.0004_auto_20210414_1835... OK
+```
+
+### Templates
+
+Permissions for the current user are stored in `{{ perms }}` template variable. The `{{ perms.catalog.can_mark_returned }}` will be `True` if the user has this permission, and `False` otherwise.
+
+### Views
+
+Permissions can be tested in function-based and class-based views using `permission_required` decorator and `PermissionRequireMixin` parent object, respectively.
+
+```
+from django.contrib.auth.decorators import permission_required
+
+@permission_required('catalog.can_mark_returned')
+def my_view(request):
+    pass
+```
+
+and
+
+```
+from django.contrib.auth.mixins import PermissionRequiredMixin
+
+class MyView(PermissionRequiredMixin, View):
+    permission_required = 'catalog.can_mark_returned'
+```
+
