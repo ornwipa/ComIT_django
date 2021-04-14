@@ -131,8 +131,49 @@ Running migrations:
 
 ### On loan view
 
+To add a view to get the list of all books, use the same generic `ListView` but also derive from `LoginRequiredMixin` so that an authenticated user can call this view. The `template_name` is declared rather than using a default one.
+
+To restrict `BookInstance` objects for current user, re-implement `get_queryset()` to filter the user and "on loan" status.
+
+```
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
+    model = BookInstance
+    template_name ='catalog/bookinstance_list_borrowed_user.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
+```
+
 ### URL for on-loan books
+
+In **/catalog/urls.py**, add a path pointing to the view: `path('mybooks/', views.LoanedBooksByUserListView.as_view(), name='my-borrowed')`
 
 ### Template for on-loan books
 
+Create the template file **/catalog/templates/catalog/bookinstance_list_borrowed_user.html**:
+```
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Borrowed books</h1>
+
+    {% if bookinstance_list %}
+    <ul>
+      {% for bookinst in bookinstance_list %}
+      <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
+        <a href="{% url 'book-detail' bookinst.book.pk %}">{{bookinst.book.title}}</a> ({{ bookinst.due_back }})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>There are no books borrowed.</p>
+    {% endif %}
+{% endblock %}
+```
+
 ## Permissions
+
